@@ -1,0 +1,11 @@
+<h1><%= @ticket.title %></h1>
+
+<p><%= @ticket.description %></p>
+<p><%= @ticket.deadline %></p>
+<p><%= @ticket.ticket_type %></p>
+<p><%= @ticket.status %></p>
+<p><%= @ticket.creator %></p>
+<p><%= @ticket.developer %></p>
+<p><%= @ticket.project_id %></p>
+
+<%= button_to "Delete", ticket_destroy_path(id: @ticket.id), method: :delete, data: { confirm: "Are you sure about that?", turbo_confirm: "Are you sure about that?" }, class: "btn btn-primary my-2 my-sm-0" %>

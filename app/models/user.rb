@@ -5,9 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   enum designation: {
-    manager: 'manager',
-    developer: 'developer',
-    qa: 'qa'
+    manager: "manager",
+    developer: "developer",
+    qa: "qa"
   }
 
   validates :email, :encrypted_password, :designation, :name, presence: true

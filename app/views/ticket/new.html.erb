@@ -1,0 +1,48 @@
+<h1>Create a new Portfolio Item</h1>
+
+<%= form_with(model: @tickets, url: ticket_create_path, method: :post) do |ticket| %>
+  <div>
+    <%= ticket.label :title, style: "display: block" %>
+    <%= ticket.text_field :title %>
+  </div>
+
+  <div>
+    <%= ticket.label :description, style: "display: block" %>
+    <%= ticket.text_field :description %>
+  </div>
+
+  <div>
+    <%= ticket.label :deadline, style: "display: block" %>
+    <%= ticket.date_field :deadline %>
+  </div>
+
+  <div>
+      <%= ticket.label :ticket_type, style: "display: block" %>
+      <%= ticket.text_field :ticket_type %>
+  </div>
+
+  <div>
+      <%= ticket.label :status, style: "display: block" %>
+      <%= ticket.text_field :status %>
+  </div>
+
+  <div>
+      <%= ticket.label :creator, style: "display: block" %>
+      <%= ticket.text_field :creator %>
+  </div>
+  
+  <div>
+    <%= ticket.label :developer, style: "display: block" %>
+    <%= ticket.text_field :developer %>
+  </div>
+
+  <div>
+    <%= ticket.label :project_id, style: "display: block" %>
+    <%= ticket.text_field :project_id %>
+  </div>
+
+  <div>
+    <%= ticket.submit "Create Ticket", class: "btn btn-primary m-2" %>
+  </div>
+
+<% end %>

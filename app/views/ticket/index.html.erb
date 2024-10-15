@@ -1,0 +1,22 @@
+<h1>Tickets</h1>
+ 
+<%# <a href="portfolios/new">Create New Portfolio Item</a> %>
+
+<%= link_to "Create New Portfolio Item", ticket_new_path%>
+<br>
+
+<% @tickets.each do |ticket| %>
+    <p><%= link_to ticket.title, ticket_show_path(ticket.id) %></p>
+
+    <p><%= ticket.description %></p>
+    <p><%= ticket.deadline %></p>
+    <p><%= ticket.ticket_type %></p>
+    <p><%= ticket.status %></p>
+    <p><%= ticket.creator %></p>
+    <p><%= ticket.developer %></p>
+    <p><%= ticket.project_id %></p>
+
+    <%#= image_tag ticket.thumb_image ? ticket.thumb_image : "https://www.placeholder.com/100x100" %>
+
+    <%= button_to "Delete", ticket_destroy_path(id: ticket.id), method: :delete, data: { confirm: "Are you sure about that?", turbo_confirm: "Are you sure about that?" }, class: "btn btn-primary my-2 my-sm-0" %>
+<% end %>
