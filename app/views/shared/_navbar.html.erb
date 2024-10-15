@@ -1,0 +1,51 @@
+
+    <nav class="navbar navbar-dark bg-dark navbar-expand-lg px-4">
+      <a class="navbar-brand" href="/">Navbar</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/blogs">Blogs</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/portfolios">Portfolios</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/fetch/Type something in the link">Link Display</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/form">Form</a>
+          </li>
+        </ul>
+      </div>
+        <div class="my-2 my-lg-0">
+          <%= login_helper %>
+        </div>
+    </nav>
+
+    <%if notice %>
+      <div class="m-2 alert alert-success alert-dismissible fade show" role="alert">
+        <%= notice %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% end %>
+
+    <% if alert %>
+      <div class="m-2 alert alert-success alert-dismissible fade show" role="alert">
+        <%= alert %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% end %>
