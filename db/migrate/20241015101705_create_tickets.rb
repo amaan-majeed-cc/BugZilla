@@ -1,14 +1,11 @@
 class CreateTickets < ActiveRecord::Migration[7.2]
   def change
     create_table :tickets do |t|
-      t.text :title
+      t.text :title, null: false
       t.string :description
-      t.date :deadline
-      t.string :ticket_type
-      t.string :status
-      t.string :creator
-      t.string :developer
-      t.string :project_id
+      t.date :deadline, null: false
+      t.string :ticket_type, null: false
+      t.string :status, null: false
 
       t.timestamps
     end

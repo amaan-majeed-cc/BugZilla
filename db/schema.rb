@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_16_064610) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_16_073506) do
   create_table "projects", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
@@ -24,11 +24,14 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_16_064610) do
     t.date "deadline", null: false
     t.string "ticket_type", null: false
     t.string "status", null: false
-    t.string "creator", null: false
-    t.string "developer", null: false
-    t.integer "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "creator_id", null: false
+    t.integer "developer_id", null: false
+    t.integer "project_id", null: false
+    t.index ["creator_id"], name: "index_tickets_on_creator_id"
+    t.index ["developer_id"], name: "index_tickets_on_developer_id"
+    t.index ["project_id"], name: "index_tickets_on_project_id"
     t.index ["title"], name: "index_tickets_on_title", unique: true
   end
 
@@ -55,6 +58,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_16_064610) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "tickets", "projects"
+  add_foreign_key "tickets", "users", column: "creator_id"
+  add_foreign_key "tickets", "users", column: "developer_id"
   add_foreign_key "user_projects", "projects"
   add_foreign_key "user_projects", "users"
 end
