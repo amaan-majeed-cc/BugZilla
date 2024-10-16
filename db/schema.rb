@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_15_145621) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_16_064610) do
+  create_table "projects", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tickets", force: :cascade do |t|
     t.text "title", null: false
     t.string "description"
@@ -23,6 +30,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_15_145621) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["title"], name: "index_tickets_on_title", unique: true
+  end
+
+  create_table "user_projects", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_user_projects_on_project_id"
+    t.index ["user_id"], name: "index_user_projects_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -38,4 +54,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_15_145621) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "user_projects", "projects"
+  add_foreign_key "user_projects", "users"
 end

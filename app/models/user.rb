@@ -11,4 +11,7 @@ class User < ApplicationRecord
   }
 
   validates :email, :encrypted_password, :designation, :name, presence: true
+
+  has_many :user_projects
+  has_many :project, through: :user_projects
 end

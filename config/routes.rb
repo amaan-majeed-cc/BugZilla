@@ -42,4 +42,3 @@ updated_at: )
 Ticket.create!(title: "Ticket Title", description: "Ticket description",  deadline: Date.today + 7.days, type: "Bug", status: "Open", creator: "John Doe", developer: "Jane Doe",  project_id: 1)
 
 =end
-
