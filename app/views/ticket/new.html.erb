@@ -37,6 +37,11 @@
       <%= ticket.select :status, @statuses %>
   </div>
 
+  <div class="field">
+    <%= ticket.label :image, 'Upload Screenshot' %>
+    <%= ticket.file_field :image %>
+  </div>
+
   <div>
       <%= ticket.label :developer_id, style: "display: block" %>
       <%= ticket.collection_select :developer_id, @users, :id, :name %>

@@ -35,6 +35,20 @@
         <%= t.label :developer_id, style: "display: block" %>
         <%= t.collection_select :developer_id, @users, :id, :name %>
     </div>
+
+    <div class="field">
+      <%= t.label :image, 'Upload Screenshot' %>
+      <%= t.file_field :image %>
+    </div>
+
+    <% if @ticket.image.attached? %>
+      <%= image_tag @ticket.image %>
+    <% else %>
+      <p>No image available.</p>
+    <% end %>
+
+    
+
     
     <div>
       <%= t.submit %>

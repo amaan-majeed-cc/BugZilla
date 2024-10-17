@@ -57,7 +57,26 @@ class ProjectController < ApplicationController
     end
   end
 
-  
+  def add_user
+    @project = Project.find(params[:id])
+    @users = User.all
+  end
+
+  def add_user_to_project
+    @project = Project.find(params[:id])
+    @user_id = params.permit(:user_id)[:user_id]
+    @user = User.find(params[:user_id])
+
+    if @user.projects.include?(@project)
+      redirect_to project_path(@project), alert: "User Already assigned to the Project"
+    else
+      UserProject.create(
+        user_id: @user_id,
+        project: @project
+      )
+      redirect_to project_path(@project), notice: "Assigned User to the Project"
+    end
+  end
 
   private
     def set_project

@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   # delete "ticket/destroy", to: "ticket#destroy", as: "ticket/destroy"
 
   resources :project do
+    get "add_user", on: :member
+    post "add_user_to_project", on: :member
     resources :ticket
   end
 

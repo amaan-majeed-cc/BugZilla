@@ -61,7 +61,7 @@ class TicketController < ApplicationController
     @ticket.destroy!
 
     respond_to do |format|
-      format.html { redirect_to project_ticket_path, status: :see_other, notice: "ticket was successfully destroyed." }
+      format.html { redirect_to project_path, status: :see_other, notice: "ticket was successfully destroyed." }
       format.json { head :no_content }
     end
   end
