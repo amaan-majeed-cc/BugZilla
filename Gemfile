@@ -21,6 +21,8 @@ gem "jbuilder"
 gem "image_processing", ">= 1.2"
 gem "shrine", "~> 3.3"
 
+gem 'byebug', '~> 11.1', '>= 11.1.3'
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 

@@ -10,14 +10,14 @@ class TicketController < ApplicationController
     @tickets = @project.tickets.new
     @users = User.all
     @current_user = current_user
-    @my_ticket_type = @tickets.ticket_type || "bug"
+    @my_ticket_type = @tickets.ticket_type
     @statuses = set_statuses(@my_ticket_type)
   end
 
   def create
     @current_user = current_user
     @project = Project.find(params[:project_id])
-    @ticket = @project.tickets.new(params.require(:ticket).permit(:title, :description, :deadline, :ticket_type, :status, :creator_id, :developer_id, :project_id, :image))
+    @ticket = @project.tickets.new(params.permit(:title, :description, :deadline, :ticket_type, :status, :creator_id, :developer_id, :project_id, :image))
     @my_ticket_type = @ticket.ticket_type || "bug"
     @statuses = set_statuses(@my_ticket_type)
     @users = User.all
@@ -42,6 +42,8 @@ class TicketController < ApplicationController
     @tickets = @project.tickets.new
     @users = User.all
     @current_user = current_user
+    @my_ticket_type = @ticket.ticket_type || "bug"
+    @statuses = set_statuses(@my_ticket_type)
   end
 
   def update
@@ -61,8 +63,7 @@ class TicketController < ApplicationController
     @ticket.destroy!
 
     respond_to do |format|
-      format.html { redirect_to project_path, status: :see_other, notice: "ticket was successfully destroyed." }
-      format.json { head :no_content }
+      redirect_to "/", status: :see_other, notice: "ticket was successfully destroyed."
     end
   end
 
@@ -76,7 +77,7 @@ class TicketController < ApplicationController
     end
 
     def set_statuses(my_ticket_type)
-      if @my_ticket_type == "feature"
+      if my_ticket_type == "feature"
         Ticket::FEATURE_STATUS
       else
         Ticket::BUG_STATUS

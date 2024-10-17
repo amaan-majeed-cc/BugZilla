@@ -1,0 +1,13 @@
+<h1>Add User <%= @project.name %></h1>
+
+<%= form_with url: remove_user_to_project_project_path(@project), method: :delete do |user| %>
+  <div>
+      <%= user.label :user_id, style: "display: block" %>
+      <%= user.collection_select :user_id, @users, :id, :name %>
+  </div>
+
+  <div>
+
+    <%= user.submit "Remove", class: "btn btn-primary m-2" %>
+  </div>
+<% end %>

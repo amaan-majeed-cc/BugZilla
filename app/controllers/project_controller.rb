@@ -78,6 +78,24 @@ class ProjectController < ApplicationController
     end
   end
 
+  def remove_user
+    @project = Project.find(params[:id])
+    @users = @project.user
+  end
+
+  def remove_user_to_project
+    @project = Project.find(params[:id])
+    @user = User.find(params[:user_id])
+
+    if @project.user.include?(@user)
+      UserProject.find_by(user_id: @user.id, project_id: @project.id).destroy
+      redirect_to project_path(@project), notice: "Removed User from the Project"
+    else
+      redirect_to project_path(@project), alert: "User not assigned to the Project"
+    end
+  end
+
+
   private
     def set_project
       @project = Project.find(params[:id])

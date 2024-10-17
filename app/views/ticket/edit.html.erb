@@ -23,12 +23,12 @@
 
     <div>
       <%= t.label :ticket_type, style: "display: block" %>
-      <%= t.select :ticket_type, Ticket::TICKET_TYPES, onchange: "this.form.submit()" %>
+      <%= t.select :ticket_type, Ticket::TICKET_TYPES, { id: 'ticket_type_select'}%>
     </div>
 
     <div>
       <%= t.label :status, style: "display: block" %>
-      <%= t.select :status, Ticket::BUG_STATUS %>
+      <%= t.select :status, @statuses %>
     </div>
 
     <div>

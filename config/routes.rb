@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   resources :project do
     get "add_user", on: :member
     post "add_user_to_project", on: :member
+    get "remove_user", on: :member
+    delete "remove_user_to_project", on: :member
     resources :ticket
   end
 

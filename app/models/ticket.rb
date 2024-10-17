@@ -4,7 +4,6 @@ class Ticket < ApplicationRecord
   belongs_to :project, class_name: "Project"
 
   has_one_attached :image
-  # validates_attachment_content_type :image, content_type: [ "image/png", "image/gif" ]
   validate :correct_image_type
 
   TICKET_TYPES = [ "bug", "feature" ]
