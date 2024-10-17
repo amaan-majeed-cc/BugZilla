@@ -1,2 +1,43 @@
-<h1>Ticket#edit</h1>
-<p>Find me in app/views/ticket/edit.html.erb</p>
+<h1>Edit Ticket</h1>
+
+<%= form_with(model: @ticket, url: project_ticket_path(project_id: @project), method: :patch) do |t| %>
+    <h3>For: <%= @project.name %></h3>
+
+    <div>
+      <p>Creator: <%= @current_user.name %></p>
+    </div>
+
+    <div>
+      <%= t.hidden_field :creator_id, value: current_user.id %> 
+    </div>
+    
+    <div>
+      <%= t.label :title, style: "display: block" %>
+      <%= t.text_field :title %>
+    </div>
+    <div>
+      <%= t.label :deadline, style: "display: block" %>
+      <%= t.date_field :deadline %>
+    </div>
+
+    <div>
+      <%= t.label :status, style: "display: block" %>
+      <%= t.text_field :status %>
+    </div>
+
+    <div>
+      <%= t.label :ticket_type, style: "display: block" %>
+      <%= t.text_field :ticket_type %>
+    </div>
+
+
+    <div>
+        <%= t.label :developer_id, style: "display: block" %>
+        <%= t.collection_select :developer_id, @users, :id, :name %>
+    </div>
+
+    
+    <div>
+      <%= t.submit %>
+    </div>
+<% end %>

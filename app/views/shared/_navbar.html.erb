@@ -11,11 +11,16 @@
             <%= link_to "Home", root_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= link_to "Tickets", tickets_path, class: "nav-link" %>
+            <%= link_to "Projects", project_index_path, class: "nav-link" %>
           </li>
         </ul>
       </div>
-        <div class="my-2 my-lg-0">
+        <div class="my-2 my-lg-0 d-flex align-items-center justify-content-center">
+          <% if user_signed_in? %>
+            <div>
+              <span class="text-white mx-4"><%= current_user.name %></span>
+            </div>
+            <% end %>
           <%= login_helper %>
         </div>
     </nav>
@@ -30,10 +35,11 @@
     <% end %>
 
     <% if alert %>
-      <div class="m-2 alert alert-success alert-dismissible fade show" role="alert">
+      <div class="m-2 alert alert-danger alert-dismissible fade show" role="alert">
         <%= alert %>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
     <% end %>
+    

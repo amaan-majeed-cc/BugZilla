@@ -1,6 +1,17 @@
-<h1>Create a new Portfolio Item</h1>
+<h1>Create a new Ticket</h1>
+<p>For: <%= @project.name %></p>
 
-<%= form_with(model: @tickets, url: ticket_create_path, method: :post) do |ticket| %>
+<%= form_with(model: @tickets, url: project_ticket_index_path(project_id: @project), method: :post) do |ticket| %>
+  
+  <div>
+    <p>Creator: <%= @current_user.name %></p>
+  </div>
+
+   <div>
+    <%= ticket.hidden_field :creator_id, value: current_user.id %> 
+  </div>
+
+
   <div>
     <%= ticket.label :title, style: "display: block" %>
     <%= ticket.text_field :title %>
@@ -27,18 +38,8 @@
   </div>
 
   <div>
-      <%= ticket.label :creator, style: "display: block" %>
-      <%= ticket.text_field :creator %>
-  </div>
-  
-  <div>
-    <%= ticket.label :developer, style: "display: block" %>
-    <%= ticket.text_field :developer %>
-  </div>
-
-  <div>
-    <%= ticket.label :project_id, style: "display: block" %>
-    <%= ticket.text_field :project_id %>
+      <%= ticket.label :developer_id, style: "display: block" %>
+      <%= ticket.collection_select :developer_id, @users, :id, :name %>
   </div>
 
   <div>

@@ -3,6 +3,8 @@ class Ticket < ApplicationRecord
   belongs_to :developer, class_name: "User"
   belongs_to :project, class_name: "Project"
 
+  has_one_attached :image
+
   enum :ticket_type, {
     feature: "feature",
     bug: "bug"

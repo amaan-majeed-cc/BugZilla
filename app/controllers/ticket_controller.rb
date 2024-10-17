@@ -5,34 +5,48 @@ class TicketController < ApplicationController
   end
 
   def new
-    @tickets = Ticket.new
+    # @tickets = Ticket.new
+    @project = Project.find(params[:project_id])
+    @tickets = @project.tickets.new
+    @users = User.all
+    @current_user = current_user
   end
 
   def create
-    @ticket = Ticket.new(ticket_params)
+    @current_user = current_user
+    @project = Project.find(params[:project_id])
+    @ticket = @project.tickets.new(params.require(:ticket).permit(:title, :description, :deadline, :ticket_type, :status, :creator_id, :developer_id, :project_id, :image))
+    @users = User.all
+    # @ticket = Ticket.new(ticket_params)
 
     respond_to do |format|
       if @ticket.save
-        format.html { redirect_to tickets_path, notice: "Ticket was successfully created." }
-        format.json { render :show, status: :created, location: @ticket }
+        format.html { redirect_to project_path(id: @project), notice: "Ticket was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @ticket.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def show
-    @tickets = Ticket.find(params[:id])
+    @project = Project.find(params[:project_id])
+    @tickets = @project.tickets.new(ticket_params)
   end
 
   def edit
+    @project = Project.find(params[:project_id])
+    @tickets = @project.tickets.new
+    @users = User.all
+    @current_user = current_user
   end
 
   def update
+    @project = Project.find(params[:project_id])
+    @current_user = current_user
+    @users = User.all
     respond_to do |format|
-      if @ticket.update(ticket_params)
-        format.html { redirect_to tickets_path, notice: "Ticket was successfully updated." }
+      if @ticket.update(params.require(:ticket).permit(:title, :description, :deadline, :ticket_type, :status, :creator_id, :developer_id, :project_id, :image))
+        format.html { redirect_to project_ticket_path(project_id: @project, id: @ticket), notice: "Ticket was successfully updated." }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -43,7 +57,7 @@ class TicketController < ApplicationController
     @ticket.destroy!
 
     respond_to do |format|
-      format.html { redirect_to tickets_path, status: :see_other, notice: "ticket was successfully destroyed." }
+      format.html { redirect_to project_ticket_path, status: :see_other, notice: "ticket was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -54,6 +68,6 @@ class TicketController < ApplicationController
     end
 
     def ticket_params
-      params.require(:ticket).permit(:title, :description, :deadline, :ticket_type, :status, :creator, :developer, :project_id)
+      params.permit(:title, :description, :deadline, :ticket_type, :status, :creator_id, :developer_id, :project_id, :image)
     end
 end

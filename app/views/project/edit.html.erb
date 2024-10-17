@@ -1,0 +1,18 @@
+<h1>Edit a new Project</h1>
+
+<%= form_with(model: @projects, url: project_path, method: :patch) do |project| %>
+  <div>
+    <%= project.label :name, style: "display: block" %>
+    <%= project.text_field :name,value: @project.name %>
+  </div>
+
+  <div>
+    <%= project.label :description, style: "display: block" %>
+    <%= project.text_field :description %>
+  </div>
+
+  <div>
+    <%= project.submit "Create project", class: "btn btn-primary m-2" %>
+  </div>
+
+<% end %>
