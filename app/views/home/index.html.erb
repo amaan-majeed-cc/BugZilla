@@ -1,1 +1,22 @@
+<% if @user %>
 <h1>Home</h1>
+
+<% @tickets_assigned.each do |ticket| %>
+<h3><%= ticket.title %></h3>
+
+<p>Description: <%= ticket.description %></p>
+<p>deadline: <%= ticket.deadline %></p>
+<p>ticket_type: <%= ticket.ticket_type %></p>
+<p>status: <%= ticket.status %></p>
+<p>creator: <%= ticket.creator.name %></p>
+<p>developer: <%= ticket.developer.name %></p>
+<p>Project: <%= ticket.project.name %></p>
+
+<%= link_to "Edit Ticket", edit_project_ticket_path(project_id: ticket.project.id ,id: ticket.id) %>
+
+    <%#= image_tag ticket.thumb_image ? ticket.thumb_image : "https://www.placeholder.com/100x100" %>
+<% end %>
+
+<% else %>
+<p>Login To view the Tickets</p>
+<%end%>

@@ -20,22 +20,21 @@
       <%= t.date_field :deadline %>
     </div>
 
-    <div>
-      <%= t.label :status, style: "display: block" %>
-      <%= t.text_field :status %>
-    </div>
 
     <div>
       <%= t.label :ticket_type, style: "display: block" %>
-      <%= t.text_field :ticket_type %>
+      <%= t.select :ticket_type, Ticket::TICKET_TYPES, onchange: "this.form.submit()" %>
     </div>
 
+    <div>
+      <%= t.label :status, style: "display: block" %>
+      <%= t.select :status, Ticket::BUG_STATUS %>
+    </div>
 
     <div>
         <%= t.label :developer_id, style: "display: block" %>
         <%= t.collection_select :developer_id, @users, :id, :name %>
     </div>
-
     
     <div>
       <%= t.submit %>

@@ -10,12 +10,16 @@ class TicketController < ApplicationController
     @tickets = @project.tickets.new
     @users = User.all
     @current_user = current_user
+    @my_ticket_type = @tickets.ticket_type || "bug"
+    @statuses = set_statuses(@my_ticket_type)
   end
 
   def create
     @current_user = current_user
     @project = Project.find(params[:project_id])
     @ticket = @project.tickets.new(params.require(:ticket).permit(:title, :description, :deadline, :ticket_type, :status, :creator_id, :developer_id, :project_id, :image))
+    @my_ticket_type = @ticket.ticket_type || "bug"
+    @statuses = set_statuses(@my_ticket_type)
     @users = User.all
     # @ticket = Ticket.new(ticket_params)
 
@@ -69,5 +73,13 @@ class TicketController < ApplicationController
 
     def ticket_params
       params.permit(:title, :description, :deadline, :ticket_type, :status, :creator_id, :developer_id, :project_id, :image)
+    end
+
+    def set_statuses(my_ticket_type)
+      if @my_ticket_type == "feature"
+        Ticket::FEATURE_STATUS
+      else
+        Ticket::BUG_STATUS
+      end
     end
 end

@@ -5,10 +5,16 @@ class Ticket < ApplicationRecord
 
   has_one_attached :image
 
-  enum :ticket_type, {
-    feature: "feature",
-    bug: "bug"
-  }
+  # enum :ticket_type, {
+  #   feature: "feature",
+  #   bug: "bug"
+  # }
 
-  validates :title, :deadline, :ticket_type, :status, :creator_id, :developer_id, :project_id, presence: true
+  TICKET_TYPES = [ "bug", "feature" ]
+  BUG_STATUS = [ "new", "started", "resolved" ]
+  FEATURE_STATUS = [ "new", "started", "completed" ]
+  validates :status, inclusion: { in: BUG_STATUS + FEATURE_STATUS }
+  validates :ticket_type, inclusion: { in: TICKET_TYPES }
+
+  validates :title, :deadline, :ticket_type, :status, :creator_id, :project_id, presence: true
 end

@@ -29,12 +29,12 @@
 
   <div>
       <%= ticket.label :ticket_type, style: "display: block" %>
-      <%= ticket.text_field :ticket_type %>
+      <%= ticket.select :ticket_type, Ticket::TICKET_TYPES, onchange: "this.form.submit()"  %>
   </div>
 
   <div>
       <%= ticket.label :status, style: "display: block" %>
-      <%= ticket.text_field :status %>
+      <%= ticket.select :status, @statuses %>
   </div>
 
   <div>
