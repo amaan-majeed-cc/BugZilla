@@ -11,7 +11,6 @@
     <%= ticket.hidden_field :creator_id, value: current_user.id %> 
   </div>
 
-
   <div>
     <%= ticket.label :title, style: "display: block" %>
     <%= ticket.text_field :title %>
@@ -28,18 +27,18 @@
   </div>
 
   <div>
-      <%= ticket.label :ticket_type, style: "display: block" %>
-      <%= ticket.select :ticket_type, Ticket::TICKET_TYPES, { id: 'ticket_type_select' } %>
+      <%= ticket.label :ticket_type, class: "form-label" %>
+      <%= ticket.select :ticket_type, options_for_select([['Feature', 'feature'], ['Bug', 'bug']]), { include_blank: "Select Type" }, class: "form-select", id: "bug_type_select" %>
   </div>
 
   <div>
-      <%= ticket.label :status, style: "display: block" %>
-      <%= ticket.select :status, @statuses, { id: 'status_select' } %>
+      <%= ticket.label :status, class: "form-label" %>
+      <%= ticket.select :status, options_for_select([]), { include_blank: "Select Status" }, class: "form-select", id: "status_select"  %>
   </div>
 
   <div class="field">
     <%= ticket.label :image, 'Upload Screenshot' %>
-    <%= ticket.file_field :image %>
+    <%= ticket.file_field :image, accept: "image/png, image/gif" %>
   </div>
 
   <div>
@@ -51,4 +50,44 @@
     <%= ticket.submit "Create Ticket", class: "btn btn-primary m-2" %>
   </div>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const ticketTypeSelect = document.getElementById("bug_type_select");
+    const statusSelect = document.getElementById("status_select");
+    const statusOptions = {
+      feature: ['new', 'started', 'completed'],
+      bug: ['new', 'started', 'resolved']
+    };
+
+    ticketTypeSelect.addEventListener("change", function() {
+      const selectedType = this.value;
+      const options = statusOptions[selectedType] || [];
+      statusSelect.innerHTML = '';
+
+      options.forEach(function(status) {
+        const option = document.createElement("option");
+        option.value = status;
+        option.textContent = status;
+        statusSelect.appendChild(option);
+      });
+
+      statusSelect.value = "";
+    });
+  });
+
+  (function()
+{
+  if( window.localStorage )
+  {
+    if( !localStorage.getItem('firstLoad') )
+    {
+      localStorage['firstLoad'] = true;
+      window.location.reload();
+    }  
+    else
+      localStorage.removeItem('firstLoad');
+  }
+})();
+
+</script>
 <% end %>

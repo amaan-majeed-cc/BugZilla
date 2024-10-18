@@ -4,7 +4,8 @@ class Ticket < ApplicationRecord
   belongs_to :project, class_name: "Project"
 
   has_one_attached :image
-  validate :correct_image_type
+  validate :valid_image_content_type
+
 
   TICKET_TYPES = [ "bug", "feature" ]
   BUG_STATUS = [ "new", "started", "resolved" ]
@@ -15,12 +16,11 @@ class Ticket < ApplicationRecord
   validates :title, :deadline, :ticket_type, :status, :creator_id, :project_id, presence: true
 
   private
-  def correct_image_type
-    if image.attached?
-      acceptable_types = [ "image/png", "image/gif" ]
-      unless acceptable_types.include?(image.content_type)
-        errors.add(:image, "must be a PNG or GIF")
-      end
+  def valid_image_content_type
+    if image.attached? &&
+       ![ "image/png", "image/gif" ].include?(image.content_type)
+
+      errors.add(:image, "must be PNG or GIF")
     end
   end
 end

@@ -1,6 +1,6 @@
 class ProjectController < ApplicationController
+  include UserCheckable
   before_action :set_project, only: %i[ show edit update destroy ]
-  before_action :check_user!, only: :index
 
   def index
     @projects = current_user.projects
@@ -104,7 +104,6 @@ class ProjectController < ApplicationController
     def project_params
       params.permit(:name, :description)
     end
-
     def check_user!
       redirect_to new_user_session_path unless current_user
     end

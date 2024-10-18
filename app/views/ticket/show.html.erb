@@ -9,10 +9,10 @@
 <p>Project: <%= @ticket.project.name %></p>
 
 <% if @ticket.image.attached? %>
-  <%= image_tag @ticket.image %>
+  <%= image_tag @ticket.image, class: "img-size" %>
 <% else %>
   <p>No image available.</p>
 <% end %>
-
+<br>
 <%= link_to "Edit Ticket", edit_project_ticket_path(@project.id ,@ticket.id) %>
 <%= button_to "Delete Ticket", project_ticket_path(id: @ticket.id), method: :delete, data: { confirm: "Are you sure about that?", turbo_confirm: "Are you sure about that?" }, class: "btn btn-primary m-2 my-sm-0" %>

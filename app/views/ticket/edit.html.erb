@@ -38,18 +38,15 @@
 
     <div class="field">
       <%= t.label :image, 'Upload Screenshot' %>
-      <%= t.file_field :image %>
+      <%= t.file_field :image, accept: "image/png, image/gif" %>
     </div>
 
     <% if @ticket.image.attached? %>
-      <%= image_tag @ticket.image %>
+      <%= image_tag @ticket.image, class: "img-size" %>
     <% else %>
       <p>No image available.</p>
     <% end %>
-
-    
-
-    
+    <br>
     <div>
       <%= t.submit %>
     </div>
