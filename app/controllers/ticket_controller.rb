@@ -32,8 +32,9 @@ class TicketController < ApplicationController
   end
   
   def show
-    @project = Project.find(params[:project_id])
-    @tickets = @project.tickets.new(ticket_params)
+    # @project = Project.find(params[:project_id])
+    # @tickets = @project.tickets.new(ticket_params)
+    # only show ticket if its ticket show page
   end
 
   def edit

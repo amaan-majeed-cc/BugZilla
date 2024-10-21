@@ -10,8 +10,23 @@ class Ticket < ApplicationRecord
   TICKET_TYPES = [ "bug", "feature" ]
   BUG_STATUS = [ "new", "started", "resolved" ]
   FEATURE_STATUS = [ "new", "started", "completed" ]
-  validates :status, inclusion: { in: BUG_STATUS + FEATURE_STATUS }
+  validates :status, inclusion: { in: BUG_STATUS + FEATURE_STATUS } # no need as on front end we already showing only these option like its a selectable field
   validates :ticket_type, inclusion: { in: TICKET_TYPES }
+  # enum :status, {
+  #   new: "new",
+  #   started: "started",
+  #   resolved: "resolved",
+  #   completed: "completed"
+  # }
+
+  # enum :ticket_type, {
+  #   bug: "bug",
+  #   feature: "feature"
+  # }
+
+
+  # why not use enum
+  # use enum
 
   validates :title, :deadline, :ticket_type, :status, :creator_id, :project_id, presence: true
 

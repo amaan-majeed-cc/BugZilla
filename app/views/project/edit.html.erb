@@ -3,16 +3,19 @@
 <%= form_with(model: @projects, url: project_path, method: :patch) do |project| %>
   <div>
     <%= project.label :name, style: "display: block" %>
-    <%= project.text_field :name,value: @project.name %>
+    <%= project.text_field :name, value: @project.name %>
   </div>
 
   <div>
     <%= project.label :description, style: "display: block" %>
-    <%= project.text_field :description %>
+    <%= project.text_field :description, value: @project.description %>
   </div>
 
   <div>
-    <%= project.submit "Create project", class: "btn btn-primary m-2" %>
+    <%= project.submit "Update project", class: "btn btn-primary m-2" %>
+    
   </div>
 
 <% end %>
+
+<%= button_to "Cancel", project_path(@project), method: :get, data: { confirm: "Are you sure about that?", turbo_confirm: "Are you sure about that?" }, class: "btn btn-primary m-2 my-sm-0" %>
