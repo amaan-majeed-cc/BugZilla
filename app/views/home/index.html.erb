@@ -9,7 +9,7 @@
         <p>ticket_type: <%= ticket.ticket_type %></p>
         <p>status: <%= ticket.status %></p>
         <p>creator: <%= ticket.creator.name %></p>
-        <p>developer: <%= ticket.developer.name %></p>
+        <p>developer: <%= ticket.developer.try(:name) || "Unassigned" %></p>
         <p>Project: <%= ticket.project.name %></p>
 
         <%= link_to "Edit Ticket", edit_project_ticket_path(project_id: ticket.project.id ,id: ticket.id) %>

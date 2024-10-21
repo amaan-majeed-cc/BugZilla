@@ -27,6 +27,7 @@ class ProjectController < ApplicationController
     @project = Project.find(params[:id])
     @tickets = @project.tickets
     @current_project = current_user.projects.find(params[:id])
+    @team = @project.user
   end
 
   def edit
@@ -52,6 +53,7 @@ class ProjectController < ApplicationController
   def add_user
     @project = Project.find(params[:id])
     @users = User.all
+    @team = @project.user
   end
 
   def add_user_to_project
@@ -73,11 +75,14 @@ class ProjectController < ApplicationController
   def remove_user
     @project = Project.find(params[:id])
     @users = @project.user
+    @team = @project.user
   end
 
   def remove_user_to_project
     @project = Project.find(params[:id])
     @user = User.find(params[:user_id])
+
+    @tickets_of_project = @project.user.find(params[:user_id]).tickets_assigned.update_all(developer_id: nil)
 
     if @project.user.include?(@user)
       UserProject.find_by(user_id: @user.id, project_id: @project.id).destroy

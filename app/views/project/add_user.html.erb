@@ -1,5 +1,15 @@
 <h1>Add User <%= @project.name %></h1>
 
+<h2>Team: </h2>
+    <% if @team == nil %>
+        <p>No users assigned to this team</p>
+    <% else %>
+        <% @team.each do |user| %>
+        <%= user.name %> | 
+        <%end%>
+    <% end %>
+
+
 <%= form_with url: add_user_to_project_project_path(@project), method: :post do |user| %>
   <div>
       <%= user.label :user_id, style: "display: block" %>

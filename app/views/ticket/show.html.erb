@@ -5,7 +5,7 @@
 <p>ticket_type: <%= @ticket.ticket_type %></p>
 <p>status: <%= @ticket.status %></p>
 <p>creator: <%= @ticket.creator.name %></p>
-<p>developer: <%= @ticket.developer.name %></p>
+<p>developer: <%= @ticket.developer.try(:name) || "Unassigned" %></p>
 <p>Project: <%= @ticket.project.name %></p>
 
 <% if @ticket.image.attached? %>
@@ -13,8 +13,10 @@
 <% else %>
   <p>No image available.</p>
 <% end %>
+
 <br>
 <%= link_to "Edit Ticket", edit_project_ticket_path(@project.id ,@ticket.id) %>
+
 <% if current_user.designation == "manager" %>
-<%= button_to "Delete Ticket", project_ticket_path(id: @ticket.id), method: :delete, data: { confirm: "Are you sure about that?", turbo_confirm: "Are you sure about that?" }, class: "btn btn-primary m-2 my-sm-0" %>
+  <%= button_to "Delete Ticket", project_ticket_path(id: @ticket.id), method: :delete, data: { confirm: "Are you sure about that?", turbo_confirm: "Are you sure about that?" }, class: "btn btn-primary m-2 my-sm-0" %>
 <% end %>

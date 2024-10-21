@@ -1,5 +1,15 @@
 <h1>Remove User <%= @project.name %></h1>
 
+<h2>Team: </h2>
+    <% if @team == nil %>
+        <p>No users assigned to this team</p>
+    <% else %>
+        <% @team.each do |user| %>
+        <%= user.name %> | 
+        <%end%>
+    <% end %>
+
+
 <%= form_with url: remove_user_to_project_project_path(@project), method: :delete do |user| %>
   <div>
       <%= user.label :user_id, style: "display: block" %>
@@ -7,7 +17,6 @@
   </div>
 
   <div>
-
-    <%= user.submit "Remove", class: "btn btn-primary m-2", data: { confirm: "Are you sure about that?", turbo_confirm: "Are you sure about that?" } %>
+    <%= user.submit "Remove", class: "btn btn-primary m-2", data: { turbo_confirm: "Are you sure about that?" } %>
   </div>
 <% end %>
