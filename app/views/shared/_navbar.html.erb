@@ -19,6 +19,11 @@
           <% if user_signed_in? %>
             <div>
               <span class="text-white mx-4"><%= current_user.name %></span>
+              <% if current_user.designation == "manager" %>
+                <span class="text-danger mx-4"><%= current_user.designation %></span>
+              <% else %>
+                <span class="text-white mx-4"><%= current_user.designation %></span>
+              <% end %>
             </div>
             <% end %>
           <%= login_helper %>

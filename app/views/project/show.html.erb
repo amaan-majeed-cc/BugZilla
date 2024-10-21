@@ -1,13 +1,14 @@
 <h1><%= @project.name %></h1>
 <p><%= @project.description %></p>
+<% if current_user.designation == "manager" %>
 <%= link_to "Edit Project", edit_project_path(@project.id) %>
 <br>
 <%= link_to "Add User to Project", add_user_project_path(@project.id) %>
 <br>
 <%= link_to "Remove User from Project", remove_user_project_path(@project.id) %>
-
 <p><%=link_to "Create new Ticket", new_project_ticket_path(project_id: @project) %></p>
-
+<% end %>
+<h3>Tickets</h3>
 <% @tickets.each do |ticket| %>
     <p><%= link_to ticket.title, project_ticket_path(@project, ticket.id) %></p>
 
@@ -20,7 +21,11 @@
     <p>Project: <%= ticket.project.name %></p>
 
     <%#= image_tag ticket.thumb_image ? ticket.thumb_image : "https://www.placeholder.com/100x100" %>
-    <%= button_to "Delete Ticket", project_ticket_path(project_id: @project ,id: ticket.id), method: :delete, data: { confirm: "Are you sure about that?", turbo_confirm: "Are you sure about that?" }, class: "btn btn-primary m-2 my-sm-0" %>
+    <% if current_user.designation == "manager" %>
+        <%= button_to "Delete Ticket", project_ticket_path(project_id: @project ,id: ticket.id), method: :delete, data: { confirm: "Are you sure about that?", turbo_confirm: "Are you sure about that?" }, class: "btn btn-primary m-2 my-sm-0" %>
+    <% end %>
 <% end %>
 
-<%= button_to "Delete Project", project_path(id: @project.id), method: :delete, data: { confirm: "Are you sure about that?", turbo_confirm: "Are you sure about that?" }, class: "btn btn-primary m-2 my-sm-0" %>
+<% if current_user.designation == "manager" %>
+    <%= button_to "Delete Project", project_path(id: @project.id), method: :delete, data: { confirm: "Are you sure about that?", turbo_confirm: "Are you sure about that?" }, class: "btn btn-primary m-2 my-sm-0" %>
+<% end %>

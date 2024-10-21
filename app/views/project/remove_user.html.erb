@@ -1,4 +1,4 @@
-<h1>Add User <%= @project.name %></h1>
+<h1>Remove User <%= @project.name %></h1>
 
 <%= form_with url: remove_user_to_project_project_path(@project), method: :delete do |user| %>
   <div>
@@ -8,6 +8,6 @@
 
   <div>
 
-    <%= user.submit "Remove", class: "btn btn-primary m-2" %>
+    <%= user.submit "Remove", class: "btn btn-primary m-2", data: { confirm: "Are you sure about that?", turbo_confirm: "Are you sure about that?" } %>
   </div>
 <% end %>

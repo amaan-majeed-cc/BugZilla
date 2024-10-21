@@ -2,15 +2,17 @@
  <p><%=@user%></p>
 <%# <a href="portfolios/new">Create New Portfolio Item</a> %>
 
+<% if current_user.designation == "manager" %>
 <%= link_to "Create New Project", new_project_path %>
+<% end %>
 <br>
 
 <% @projects.each do |project| %>
-    <p><%= link_to project.name, project_path(project.id) %></p>
+  <p><%= link_to project.name, project_path(project.id) %></p>
+  <p><%= project.description %></p>
 
-    <p><%= project.description %></p>
-
-    <%#= image_tag project.thumb_image ? project.thumb_image : "https://www.placeholder.com/100x100" %>
-
-    <%= button_to "Delete", project_path(id: project.id), method: :delete, data: { confirm: "Are you sure about that?", turbo_confirm: "Are you sure about that?" }, class: "btn btn-primary my-2 my-sm-0" %>
+  <%#= image_tag project.thumb_image ? project.thumb_image : "https://www.placeholder.com/100x100" %>
+  <% if current_user.designation == "manager" %>
+    <%= button_to "Delete", project_path(id: project.id), method: :delete, data: { confirm: " ?", turbo_confirm: "Are you sure about that?" }, class: "btn btn-primary my-2 my-sm-0" %>
+  <% end %>
 <% end %>

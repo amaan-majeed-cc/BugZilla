@@ -8,7 +8,7 @@ class TicketController < ApplicationController
   def new
     @project = Project.find(params[:project_id])
     @tickets = @project.tickets.new
-    @users = User.all
+    @users = @project.user
     @current_user = current_user
     @my_ticket_type = @tickets.ticket_type
     @statuses = set_statuses(@my_ticket_type)
@@ -20,7 +20,7 @@ class TicketController < ApplicationController
     @ticket = @project.tickets.new(params.require(:ticket).permit(:title, :description, :deadline, :ticket_type, :status, :creator_id, :developer_id, :project_id, :image))
     @my_ticket_type = @ticket.ticket_type || "bug"
     @statuses = set_statuses(@my_ticket_type)
-    @users = User.all
+    @users = @project.user
 
     respond_to do |format|
       if @ticket.save
@@ -30,7 +30,7 @@ class TicketController < ApplicationController
       end
     end
   end
-  
+
   def show
     # @project = Project.find(params[:project_id])
     # @tickets = @project.tickets.new(ticket_params)

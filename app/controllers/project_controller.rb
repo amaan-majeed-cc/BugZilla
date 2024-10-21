@@ -43,17 +43,9 @@ class ProjectController < ApplicationController
   end
 
   def destroy
-    @current_project = current_user.projects.find(params[:id])
-
-    if @current_project.tickets.any?
-
-      redirect_to @project, alert: "Cannot Delete the Project with Tickets inside it: Delete the Tickets then delete the project"
-    else
-      @project.destroy!
-
-      respond_to do |format|
-        format.html { redirect_to project_index_path, status: :see_other, notice: "Project was successfully destroyed." }
-      end
+    @project.destroy!
+    respond_to do |format|
+      format.html { redirect_to project_index_path, status: :see_other, notice: "Project was successfully destroyed." }
     end
   end
 
