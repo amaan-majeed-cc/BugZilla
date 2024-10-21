@@ -4,7 +4,7 @@ one:
   title: MyText
   description: MyString
   deadline: 2024-10-15
-  type: 
+  ticket_type: MyString
   status: MyString
   creator: MyString
   developer: MyString
@@ -14,7 +14,7 @@ two:
   title: MyText
   description: MyString
   deadline: 2024-10-15
-  type: 
+  ticket_type: MyString
   status: MyString
   creator: MyString
   developer: MyString
