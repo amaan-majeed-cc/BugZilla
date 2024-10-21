@@ -1,13 +1,17 @@
 <h1><%= @project.name %></h1>
 
-<h2>Team: </h2>
+<div class="d-flex align-items-center">
+  <h3>Team: </h3>
+  <p class="m-0 ml-2">
     <% if @team == nil %>
-        <p>No users assigned to this team</p>
+      No users assigned to this team
     <% else %>
-        <% @team.each do |user| %>
-        <%= user.name %> | 
-        <%end%>
+      <% @team.each do |user| %>
+      <%= user.name %> | 
+      <%end%>
     <% end %>
+  </p>
+</div>
 
 <p><%= @project.description %></p>
 

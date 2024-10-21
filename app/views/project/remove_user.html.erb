@@ -1,14 +1,17 @@
 <h1>Remove User <%= @project.name %></h1>
 
-<h2>Team: </h2>
+<div class="d-flex align-items-center">
+  <h3>Team: </h3>
+  <p class="m-0 ml-2">
     <% if @team == nil %>
-        <p>No users assigned to this team</p>
+      No users assigned to this team
     <% else %>
-        <% @team.each do |user| %>
+      <% @team.each do |user| %>
         <%= user.name %> | 
-        <%end%>
+      <%end%>
     <% end %>
-
+  </p>
+</div>
 
 <%= form_with url: remove_user_to_project_project_path(@project), method: :delete do |user| %>
   <div>
