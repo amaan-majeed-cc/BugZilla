@@ -72,7 +72,6 @@ class ProjectController < ApplicationController
     end
   end
 
-  
   def remove_user
     @project = Project.find(params[:id])
     @users = @project.user
