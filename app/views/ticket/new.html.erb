@@ -43,7 +43,7 @@
 
   <div>
       <%= ticket.label :developer_id, style: "display: block" %>
-      <%= ticket.collection_select :developer_id, @users, :id, :name %>
+      <%= ticket.collection_select :developer_id, @users, :id, :name, include_blank: "Unassigned" %>
   </div>
 
   <div>

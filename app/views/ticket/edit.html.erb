@@ -39,7 +39,7 @@
 
     <div>
         <%= t.label :developer_id, style: "display: block" %>
-        <%= t.collection_select :developer_id, @users, :id, :name %>
+        <%= t.collection_select :developer_id, @users, :id, :name, include_blank: "Unassigned" %>
     </div>
 
     <div class="field">
